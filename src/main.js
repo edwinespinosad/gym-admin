@@ -8,7 +8,7 @@ import './assets/main.css'
 import vuetify from './plugins/vuetify'
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import '../src/assets/global.scss'
+import '../src/assets/base.css'
 
 export const bus = new Vue();
 

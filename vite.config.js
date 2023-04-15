@@ -22,11 +22,13 @@ export default defineConfig({
     }),
     {
       name: 'sass',
-      renderChunk: (code) => require('sass').renderSync({ data: code }).css,
       transform: (code, id) => {
-        if (id.endsWith('.scss') || id.endsWith('.sass')) {
-          return sass.renderSync({ file: id }).css.toString();
-        }
+        if (!/\.scss$/.test(id)) return;
+        const result = sass.renderSync({ data: code });
+        return {
+          code: result?.css?.toString() || code,
+          map: result?.map?.toString() || '',
+        };
       },
     }
   ],
