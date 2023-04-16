@@ -11,7 +11,7 @@ import sass from 'sass'
 // https://vitejs.dev/config/
 
 const env = loadEnv('', process.cwd())
-console.log(env)
+
 export default defineConfig({
   define: {
     'process.env': {

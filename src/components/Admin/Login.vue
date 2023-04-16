@@ -133,7 +133,6 @@ export default {
       /"/g,
       ""
     )}/api/is-logged`;
-    console.log(process.env.VITE_API_URL.replace(/"/g, ""));
     console.log(this.URL_CREATE);
   },
   methods: {
