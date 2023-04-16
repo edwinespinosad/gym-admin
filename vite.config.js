@@ -3,14 +3,25 @@ import { fileURLToPath, URL } from 'node:url'
 import { VuetifyResolver } from 'unplugin-vue-components/resolvers';
 import Components from 'unplugin-vue-components/vite';
 
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import legacy from '@vitejs/plugin-legacy'
 import vue2 from '@vitejs/plugin-vue2'
 const path = require('path')
 import sass from 'sass'
-
 // https://vitejs.dev/config/
+
+const env = loadEnv('', process.cwd())
+console.log(env)
 export default defineConfig({
+  define: {
+    'process.env': {
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      ...Object.keys(env).reduce((prev, next) => {
+        prev[`${next}`] = JSON.stringify(env[next])
+        return prev
+      }, {})
+    }
+  },
   plugins: [
     vue2(),
     Components({

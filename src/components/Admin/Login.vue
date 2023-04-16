@@ -127,8 +127,14 @@ export default {
     };
   },
   created() {
-    this.URL_CREATE = "http://localhost:3000/api/login";
-    this.URL_VALID = "http://localhost:3000/api/is-logged";
+    this.URL_CREATE = `${process.env.VITE_API_URL.replace(/"/g, "")}/api/login`;
+    // this.URL_CREATE = process.env.VITE_API_URL.replace(/"/g, "") + "/api/login";
+    this.URL_VALID = `${process.env.VITE_API_URL.replace(
+      /"/g,
+      ""
+    )}/api/is-logged`;
+    console.log(process.env.VITE_API_URL.replace(/"/g, ""));
+    console.log(this.URL_CREATE);
   },
   methods: {
     signIn() {

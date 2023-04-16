@@ -2,10 +2,15 @@
   <div style="background-color: #0f0f0f" class="rounded-2">
     <FormInstructor :update="false"></FormInstructor>
 
-    <Table :columns="columns" :url="url" :toggleSwitch="true" :urlState="urlStatus">
+    <Table
+      :columns="columns"
+      :url="url"
+      :toggleSwitch="true"
+      :urlState="urlStatus"
+    >
       <template v-slot:image="{ data }">
         <v-img
-          :src="`http://localhost:3000/${data.image}`"
+          :src="`${URL}/${data.image}`"
           height="50"
           width="50"
           contain
@@ -30,6 +35,7 @@ import axios from "axios";
 export default {
   components: { Table, FormInstructor },
   data: () => ({
+    URL: process.env.VITE_API_URL.replace(/"/g, ""),
     users: [],
     usersPag: [],
     paginaActual: 1,
@@ -60,8 +66,11 @@ export default {
         name: "email",
       },
     ],
-    url: "http://localhost:3000/api/instructors",
-    urlStatus: "http://localhost:3000/api/instructors/activate",
+    url: `${process.env.VITE_API_URL.replace(/"/g, "")}/api/instructors`,
+    urlStatus: `${process.env.VITE_API_URL.replace(
+      /"/g,
+      ""
+    )}/api/instructors/activate`,
   }),
   methods: {
     deleteInstructor(id) {
@@ -76,7 +85,12 @@ export default {
         .then((result) => {
           if (result.isConfirmed) {
             axios
-              .delete("http://localhost:3000/api/instructors/" + id)
+              .delete(
+                `${process.env.VITE_API_URL.replace(
+                  /"/g,
+                  ""
+                )}/api/instructors/` + id
+              )
               .then((response) => {
                 if (response.status == 204) {
                   this.$swal.fire({

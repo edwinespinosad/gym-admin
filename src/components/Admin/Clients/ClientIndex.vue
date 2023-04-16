@@ -2,10 +2,15 @@
   <div style="background-color: #0f0f0f" class="rounded-2">
     <!-- <FormUser :update="false"></FormUser> -->
 
-    <Table :columns="columns" :url="url" :toggleSwitch="true" :urlState="urlStatus">
+    <Table
+      :columns="columns"
+      :url="url"
+      :toggleSwitch="true"
+      :urlState="urlStatus"
+    >
       <template v-slot:image="{ data }">
         <v-img
-          :src="`http://localhost:3000/${data.image}`"
+          :src="`${URL}/${data.image}`"
           height="50"
           width="50"
           contain
@@ -30,6 +35,7 @@ import { bus } from "../../../main.js";
 export default {
   components: { Table },
   data: () => ({
+    URL: process.env.VITE_API_URL.replace(/"/g, ""),
     users: [],
     usersPag: [],
     paginaActual: 1,
@@ -60,8 +66,11 @@ export default {
         name: "email",
       },
     ],
-    url: "http://localhost:3000/api/clients",
-    urlStatus: "http://localhost:3000/api/clients/activate",
+    url: `${process.env.VITE_API_URL.replace(/"/g, "")}/api/clients`,
+    urlStatus: `${process.env.VITE_API_URL.replace(
+      /"/g,
+      ""
+    )}/api/clients/activate`,
   }),
   methods: {
     deleteUser(id) {
@@ -76,7 +85,10 @@ export default {
         .then((result) => {
           if (result.isConfirmed) {
             axios
-              .delete("http://localhost:3000/api/clients/" + id)
+              .delete(
+                `${process.env.VITE_API_URL.replace(/"/g, "")}/api/clients/` +
+                  id
+              )
               .then((response) => {
                 console.log(response);
                 if (response.status === 204) {

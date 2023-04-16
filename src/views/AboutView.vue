@@ -38,11 +38,11 @@ export default {
       },
     ],
     users: [],
-    url: "http://localhost:3000/api/users",
+    url: `${process.env.VITE_API_URL.replace(/"/g, "")}/api/users`,
   }),
   async created() {
     await axios
-      .get("http://localhost:3000/api/users")
+      .get(`${process.env.VITE_API_URL.replace(/"/g, "")}/api/users`)
       .then((response) => {
         this.users = response.data.rows;
       })
@@ -63,7 +63,7 @@ export default {
         .then((result) => {
           if (result.isConfirmed) {
             axios
-              .delete("http://localhost:3000/api/users/" + id)
+              .delete(`${process.env.VITE_API_URL.replace(/"/g, "")}/api/users/` + id)
               .then((response) => {
                 console.log(response);
                 if ((response.status = 404)) {

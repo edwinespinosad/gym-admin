@@ -48,8 +48,8 @@ export default {
         name: "email",
       },
     ],
-    url: "http://localhost:3000/api/users",
-    urlStatus: "http://localhost:3000/api/users/activate",
+    url: `${process.env.VITE_API_URL.replace(/"/g, "")}/api/users`,
+    urlStatus: `${process.env.VITE_API_URL.replace(/"/g, "")}/api/users/activate`,
   }),
   methods: {
     deleteUser(id) {
@@ -64,7 +64,7 @@ export default {
         .then((result) => {
           if (result.isConfirmed) {
             axios
-              .delete("http://localhost:3000/api/users/" + id)
+              .delete(`${process.env.VITE_API_URL.replace(/"/g, "")}/api/users/` + id)
               .then((response) => {
                 console.log(response);
                 if ((response.status === 204)) {

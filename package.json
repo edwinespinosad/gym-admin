@@ -25,6 +25,7 @@
     "@types/jsonwebtoken": "^9.0.1",
     "@vitejs/plugin-legacy": "^2.0.0",
     "@vitejs/plugin-vue2": "^1.1.2",
+    "dotenv": "^16.0.3",
     "sass": "~1.32.0",
     "sass-loader": "^10.1.1",
     "terser": "^5.14.2",

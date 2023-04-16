@@ -165,7 +165,7 @@ export default {
       try {
         const response = await axios
           .get(
-            `http://localhost:3000/api/incomes?periodo=${this.periodIncome.toLowerCase()}`,
+            `${process.env.VITE_API_URL.replace(/"/g, "")}/api/incomes?periodo=${this.periodIncome.toLowerCase()}`,
             {
               headers: { "x-access-token": localStorage.getItem("token") },
             }
@@ -185,7 +185,7 @@ export default {
       try {
         const response = await axios
           .get(
-            `http://localhost:3000/api/memberships-sales?periodo=${this.periodMembershipSales.toLowerCase()}`,
+            `${process.env.VITE_API_URL.replace(/"/g, "")}/api/memberships-sales?periodo=${this.periodMembershipSales.toLowerCase()}`,
             {
               headers: { "x-access-token": localStorage.getItem("token") },
             }
@@ -218,7 +218,7 @@ export default {
       try {
         const response = await axios
           .get(
-            `http://localhost:3000/api/new-clients?periodo=${this.periodNewClients.toLowerCase()}`,
+            `${process.env.VITE_API_URL.replace(/"/g, "")}/api/new-clients?periodo=${this.periodNewClients.toLowerCase()}`,
             {
               headers: { "x-access-token": localStorage.getItem("token") },
             }

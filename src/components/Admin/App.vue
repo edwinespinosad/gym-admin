@@ -36,7 +36,7 @@ export default {
     user: {},
   }),
   created() {
-    this.URL_VALID = "http://localhost:3000/api/is-logged";
+    this.URL_VALID = `${process.env.VITE_API_URL.replace(/"/g, "")}/api/is-logged`;
 
     let token = { token: localStorage.getItem("token") };
 
@@ -45,7 +45,7 @@ export default {
         this.logged = true;
         axios
           .get(
-            "http://localhost:3000/api/users/" + localStorage.getItem("user"),
+            `${process.env.VITE_API_URL.replace(/"/g, "")}/api/users/` + localStorage.getItem("user"),
             {
               headers: { "x-access-token": localStorage.getItem("token") },
             }

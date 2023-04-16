@@ -10,6 +10,9 @@ import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import '../src/assets/base.css'
 
+// import dotenv from 'dotenv'
+// dotenv.config()
+
 export const bus = new Vue();
 
 Vue.use(VueSweetalert2);

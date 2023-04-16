@@ -46,8 +46,8 @@ export default {
         name: "benefits",
       },
     ],
-    url: "http://localhost:3000/api/memberships",
-    urlStatus: "http://localhost:3000/api/memberships/activate",
+    url: `${process.env.VITE_API_URL.replace(/"/g, "")}/api/memberships`,
+    urlStatus: `${process.env.VITE_API_URL.replace(/"/g, "")}/api/memberships/activate`,
   }),
   methods: {
     deleteMembership(id) {
@@ -62,7 +62,7 @@ export default {
         .then((result) => {
           if (result.isConfirmed) {
             axios
-              .delete("http://localhost:3000/api/memberships/" + id)
+              .delete(`${process.env.VITE_API_URL.replace(/"/g, "")}/api/memberships/` + id)
               .then((response) => {
                 console.log(response.status);
                 if ((response.status == 204)) {

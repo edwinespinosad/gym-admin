@@ -60,7 +60,7 @@
                       :src="
                         view_image.includes('blob')
                           ? view_image
-                          : `http://localhost:3000/${view_image}`
+                          : URL + '/' + view_image
                       "
                       v-if="image !== null"
                       @click="selectImage"
@@ -68,8 +68,7 @@
                       max-height="109"
                       width="109"
                       height="109"
-                      style="
-                        cursor: pointer;
+                      style="cursor: pointer;
                         margin-top: -2px;
                         margin-right: -1px;
                       "
@@ -146,6 +145,7 @@ import axios from "axios";
 import { bus } from "../../../main.js";
 export default {
   data: () => ({
+    URL: process.env.VITE_API_URL.replace(/"/g, ""),
     dialog: false,
     instructor: {
       id: "",
@@ -173,8 +173,14 @@ export default {
     dataUpdate: Object,
   },
   created() {
-    this.URL_CREATE = "http://localhost:3000/api/instructors";
-    this.URL_UPDATE = "http://localhost:3000/api/instructors/";
+    this.URL_CREATE = `${process.env.VITE_API_URL.replace(
+      /"/g,
+      ""
+    )}/api/instructors`;
+    this.URL_UPDATE = `${process.env.VITE_API_URL.replace(
+      /"/g,
+      ""
+    )}/api/instructors/`;
   },
   watch: {
     image(file) {

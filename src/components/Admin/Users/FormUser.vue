@@ -134,8 +134,8 @@ export default {
     dataUpdate: Object,
   },
   created() {
-    this.URL_CREATE = "http://localhost:3000/api/users";
-    this.URL_UPDATE = "http://localhost:3000/api/users/";
+    this.URL_CREATE = `${process.env.VITE_API_URL.replace(/"/g, "")}/api/users`;
+    this.URL_UPDATE = `${process.env.VITE_API_URL.replace(/"/g, "")}/api/users/`;
   },
   methods: {
     close() {
