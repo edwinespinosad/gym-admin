@@ -10,7 +10,7 @@
     >
       <template v-slot:image="{ data }">
         <v-img
-          :src="`${URL}/${data.image}`"
+          :src="`${data.image}`"
           height="50"
           width="50"
           contain
@@ -32,9 +32,48 @@ import FormInstructor from "./FormInstructor.vue";
 import Table from "../../commons/Table.vue";
 import { bus } from "../../../main.js";
 import axios from "axios";
+// import firebase from "firebase/app";
+// import "firebase/storage";
+// import { initializeApp } from "firebase/app";
+// import {
+//   getStorage,
+//   ref,
+//   getDownloadURL,
+//   uploadBytesResumable,
+// } from "firebase/storage";
+
+// const firebaseConfig = {
+//   apiKey: process.env.VITE_apiKey,
+//   authDomain: process.env.VITE_authDomain,
+//   projectId: process.env.VITE_projectId,
+//   storageBucket: process.env.VITE_storageBucket,
+//   messagingSenderId: process.env.VITE_messagingSenderId,
+//   appId: process.env.VITE_appId,
+//   measurementId: process.env.VITE_measurementId,
+// };
+// initializeApp(firebaseConfig);
+
 export default {
   components: { Table, FormInstructor },
+  mounted() {
+    // const storage = getStorage();
+    // const pathReference = ref(storage, "files/1681758790215.png");
+    // const downloadURL = getDownloadURL(pathReference);
+    // console.log(downloadURL);
+    
+    // const storageRef = getStorage().ref().child("files/1681758790215.png");
+
+    // storageRef
+    //   .getDownloadURL()
+    //   .then((url) => {
+    //     this.imageFB = url;
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+  },
   data: () => ({
+    imageFB: null,
     URL: process.env.VITE_API_URL.replace(/"/g, ""),
     users: [],
     usersPag: [],
@@ -97,7 +136,7 @@ export default {
               .then((response) => {
                 if (response.status == 204) {
                   this.$swal.fire({
-                    title: "Membresía eliminada!",
+                    title: "Instructor eliminado!",
                     icon: "success",
                     confirmButtonText: "Ok",
                     timer: 1500,
