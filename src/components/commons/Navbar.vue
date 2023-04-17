@@ -31,7 +31,7 @@
       </v-tooltip>
 
       <div
-        class="d-flex justify-content-center align-items-center"
+        class="d-flex justify-content-center align-items-center cursor-pointer"
         id="div-a"
         @click="logout()"
       >

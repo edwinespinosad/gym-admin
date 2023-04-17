@@ -135,7 +135,10 @@ export default {
   },
   created() {
     this.URL_CREATE = `${process.env.VITE_API_URL.replace(/"/g, "")}/api/users`;
-    this.URL_UPDATE = `${process.env.VITE_API_URL.replace(/"/g, "")}/api/users/`;
+    this.URL_UPDATE = `${process.env.VITE_API_URL.replace(
+      /"/g,
+      ""
+    )}/api/users/`;
   },
   methods: {
     close() {
@@ -155,9 +158,10 @@ export default {
       if (this.$refs.form.validate()) {
         if (this.update) {
           axios
-            .patch(this.URL_UPDATE + this.user.id, this.user)
+            .patch(this.URL_UPDATE + this.user.id, this.user, {
+              headers: { "x-access-token": localStorage.getItem("token") },
+            })
             .then((response) => {
-              console.log(response);
               if (response.data.success) {
                 this.$swal.fire({
                   title: "Usuario modificado!",
@@ -178,27 +182,30 @@ export default {
               }
             });
         } else {
-          axios.post(this.URL_CREATE, this.user).then((response) => {
-            console.log(response);
-            if (response.data.success) {
-              this.$swal.fire({
-                title: "Usuario agregado!",
-                icon: "success",
-                confirmButtonText: "Ok",
-                timer: 1500,
-              });
-              bus.$emit("reload-grid");
-              this.dialog = false;
-              this.$refs.form.reset();
-            } else {
-              this.$swal.fire({
-                title: "Error!",
-                text: "Verifica los campos ingresados",
-                icon: "error",
-                timer: 2000,
-              });
-            }
-          });
+          axios
+            .post(this.URL_CREATE, this.user, {
+              headers: { "x-access-token": localStorage.getItem("token") },
+            })
+            .then((response) => {
+              if (response.data.success) {
+                this.$swal.fire({
+                  title: "Usuario agregado!",
+                  icon: "success",
+                  confirmButtonText: "Ok",
+                  timer: 1500,
+                });
+                bus.$emit("reload-grid");
+                this.dialog = false;
+                this.$refs.form.reset();
+              } else {
+                this.$swal.fire({
+                  title: "Error!",
+                  text: "Verifica los campos ingresados",
+                  icon: "error",
+                  timer: 2000,
+                });
+              }
+            });
         }
       }
     },

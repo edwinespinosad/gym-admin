@@ -65,7 +65,6 @@ export default {
             axios
               .delete(`${process.env.VITE_API_URL.replace(/"/g, "")}/api/users/` + id)
               .then((response) => {
-                console.log(response);
                 if ((response.status = 404)) {
                   this.$swal.fire({
                     title: "Usuario eliminado!",

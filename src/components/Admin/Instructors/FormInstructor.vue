@@ -68,7 +68,8 @@
                       max-height="109"
                       width="109"
                       height="109"
-                      style="cursor: pointer;
+                      style="
+                        cursor: pointer;
                         margin-top: -2px;
                         margin-right: -1px;
                       "
@@ -203,13 +204,11 @@ export default {
       this.image = e.target.files[0];
       this.validImage = false;
       this.change_image = true;
-      console.log("Ha cambiado");
     },
     selectImage() {
       this.$refs.photo.click();
     },
     getData(data) {
-      console.log(data);
       this.instructor.id = data.id;
       this.instructor.name = data.name;
       this.instructor.last_name = data.last_name;
@@ -229,7 +228,9 @@ export default {
 
         if (this.update) {
           axios
-            .patch(this.URL_UPDATE + this.instructor.id, formData)
+            .patch(this.URL_UPDATE + this.instructor.id, formData, {
+              headers: { "x-access-token": localStorage.getItem("token") },
+            })
             .then((response) => {
               if (response.data.success) {
                 this.$swal.fire({
@@ -252,28 +253,31 @@ export default {
               }
             });
         } else {
-          axios.post(this.URL_CREATE, formData).then((response) => {
-            console.log(response);
-            if (response.data.success) {
-              this.$swal.fire({
-                title: "Instructor agregado!",
-                icon: "success",
-                confirmButtonText: "Ok",
-                timer: 1500,
-              });
-              bus.$emit("reload-grid");
-              this.dialog = false;
-              this.change_image = false;
-              this.$refs.form.reset();
-            } else {
-              this.$swal.fire({
-                title: "Error!",
-                text: "Verifica los campos ingresados",
-                icon: "error",
-                timer: 2000,
-              });
-            }
-          });
+          axios
+            .post(this.URL_CREATE, formData, {
+              headers: { "x-access-token": localStorage.getItem("token") },
+            })
+            .then((response) => {
+              if (response.data.success) {
+                this.$swal.fire({
+                  title: "Instructor agregado!",
+                  icon: "success",
+                  confirmButtonText: "Ok",
+                  timer: 1500,
+                });
+                bus.$emit("reload-grid");
+                this.dialog = false;
+                this.change_image = false;
+                this.$refs.form.reset();
+              } else {
+                this.$swal.fire({
+                  title: "Error!",
+                  text: "Verifica los campos ingresados",
+                  icon: "error",
+                  timer: 2000,
+                });
+              }
+            });
         }
       } else if (this.image === null) {
         this.validImage = true;

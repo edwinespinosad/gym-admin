@@ -2,7 +2,12 @@
   <div style="background-color: #0f0f0f" class="rounded-2">
     <FormMembership :update="false"></FormMembership>
 
-    <Table :columns="columns" :url="url" :toggleSwitch="true" :urlState="urlStatus">
+    <Table
+      :columns="columns"
+      :url="url"
+      :toggleSwitch="true"
+      :urlState="urlStatus"
+    >
       <template v-slot:action-slot="data">
         <FormMembership :update="true" :dataUpdate="data"></FormMembership>
         <v-icon color="red" @click="deleteMembership(data.id)">
@@ -47,7 +52,10 @@ export default {
       },
     ],
     url: `${process.env.VITE_API_URL.replace(/"/g, "")}/api/memberships`,
-    urlStatus: `${process.env.VITE_API_URL.replace(/"/g, "")}/api/memberships/activate`,
+    urlStatus: `${process.env.VITE_API_URL.replace(
+      /"/g,
+      ""
+    )}/api/memberships/activate`,
   }),
   methods: {
     deleteMembership(id) {
@@ -62,10 +70,17 @@ export default {
         .then((result) => {
           if (result.isConfirmed) {
             axios
-              .delete(`${process.env.VITE_API_URL.replace(/"/g, "")}/api/memberships/` + id)
+              .delete(
+                `${process.env.VITE_API_URL.replace(
+                  /"/g,
+                  ""
+                )}/api/memberships/` + id,
+                {
+                  headers: { "x-access-token": localStorage.getItem("token") },
+                }
+              )
               .then((response) => {
-                console.log(response.status);
-                if ((response.status == 204)) {
+                if (response.status == 204) {
                   this.$swal.fire({
                     title: "Membresía eliminada!",
                     icon: "success",

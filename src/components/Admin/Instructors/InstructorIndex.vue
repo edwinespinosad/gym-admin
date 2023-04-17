@@ -89,7 +89,10 @@ export default {
                 `${process.env.VITE_API_URL.replace(
                   /"/g,
                   ""
-                )}/api/instructors/` + id
+                )}/api/instructors/` + id,
+                {
+                  headers: { "x-access-token": localStorage.getItem("token") },
+                }
               )
               .then((response) => {
                 if (response.status == 204) {

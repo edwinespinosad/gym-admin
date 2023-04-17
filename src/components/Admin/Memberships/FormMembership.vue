@@ -117,8 +117,14 @@ export default {
     dataUpdate: Object,
   },
   created() {
-    this.URL_CREATE = `${process.env.VITE_API_URL.replace(/"/g, "")}/api/memberships`;
-    this.URL_UPDATE = `${process.env.VITE_API_URL.replace(/"/g, "")}/api/memberships/`;
+    this.URL_CREATE = `${process.env.VITE_API_URL.replace(
+      /"/g,
+      ""
+    )}/api/memberships`;
+    this.URL_UPDATE = `${process.env.VITE_API_URL.replace(
+      /"/g,
+      ""
+    )}/api/memberships/`;
   },
   methods: {
     close() {
@@ -127,7 +133,6 @@ export default {
       this.$refs.form.reset();
     },
     getData(data) {
-      console.log(data);
       this.membership.id = data.id;
       this.membership.name = data.name;
       this.membership.duration = data.duration;
@@ -137,9 +142,10 @@ export default {
     save() {
       if (this.update) {
         axios
-          .patch(this.URL_UPDATE + this.membership.id, this.membership)
+          .patch(this.URL_UPDATE + this.membership.id, this.membership, {
+            headers: { "x-access-token": localStorage.getItem("token") },
+          })
           .then((response) => {
-            console.log(response);
             if (response.data.success) {
               this.$swal.fire({
                 title: "Membresía modificada!",
@@ -161,27 +167,30 @@ export default {
           });
       } else {
         if (this.$refs.form.validate()) {
-          axios.post(this.URL_CREATE, this.membership).then((response) => {
-            console.log(response);
-            if (response.data.success) {
-              this.$swal.fire({
-                title: "Membresía agregada!",
-                icon: "success",
-                confirmButtonText: "Ok",
-                timer: 1500,
-              });
-              bus.$emit("reload-grid");
-              this.dialog = false;
-              this.$refs.form.reset();
-            } else {
-              this.$swal.fire({
-                title: "Error!",
-                text: "Verifica los campos ingresados",
-                icon: "error",
-                timer: 2000,
-              });
-            }
-          });
+          axios
+            .post(this.URL_CREATE, this.membership, {
+              headers: { "x-access-token": localStorage.getItem("token") },
+            })
+            .then((response) => {
+              if (response.data.success) {
+                this.$swal.fire({
+                  title: "Membresía agregada!",
+                  icon: "success",
+                  confirmButtonText: "Ok",
+                  timer: 1500,
+                });
+                bus.$emit("reload-grid");
+                this.dialog = false;
+                this.$refs.form.reset();
+              } else {
+                this.$swal.fire({
+                  title: "Error!",
+                  text: "Verifica los campos ingresados",
+                  icon: "error",
+                  timer: 2000,
+                });
+              }
+            });
         }
       }
     },

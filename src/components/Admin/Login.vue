@@ -133,7 +133,6 @@ export default {
       /"/g,
       ""
     )}/api/is-logged`;
-    console.log(this.URL_CREATE);
   },
   methods: {
     signIn() {

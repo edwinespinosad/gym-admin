@@ -87,10 +87,12 @@ export default {
             axios
               .delete(
                 `${process.env.VITE_API_URL.replace(/"/g, "")}/api/clients/` +
-                  id
+                  id,
+                {
+                  headers: { "x-access-token": localStorage.getItem("token") },
+                }
               )
               .then((response) => {
-                console.log(response);
                 if (response.status === 204) {
                   this.$swal.fire({
                     title: "Cliente eliminado!",

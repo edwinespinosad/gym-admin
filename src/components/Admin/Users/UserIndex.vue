@@ -2,7 +2,12 @@
   <div style="background-color: #0f0f0f" class="rounded-2">
     <FormUser :update="false"></FormUser>
 
-    <Table :columns="columns" :url="url" :toggleSwitch="true" :urlState="urlStatus">
+    <Table
+      :columns="columns"
+      :url="url"
+      :toggleSwitch="true"
+      :urlState="urlStatus"
+    >
       <template v-slot:action-slot="data">
         <FormUser :update="true" :dataUpdate="data"></FormUser>
         <v-icon color="red" @click="deleteUser(data.id)">
@@ -49,7 +54,10 @@ export default {
       },
     ],
     url: `${process.env.VITE_API_URL.replace(/"/g, "")}/api/users`,
-    urlStatus: `${process.env.VITE_API_URL.replace(/"/g, "")}/api/users/activate`,
+    urlStatus: `${process.env.VITE_API_URL.replace(
+      /"/g,
+      ""
+    )}/api/users/activate`,
   }),
   methods: {
     deleteUser(id) {
@@ -64,10 +72,14 @@ export default {
         .then((result) => {
           if (result.isConfirmed) {
             axios
-              .delete(`${process.env.VITE_API_URL.replace(/"/g, "")}/api/users/` + id)
+              .delete(
+                `${process.env.VITE_API_URL.replace(/"/g, "")}/api/users/` + id,
+                {
+                  headers: { "x-access-token": localStorage.getItem("token") },
+                }
+              )
               .then((response) => {
-                console.log(response);
-                if ((response.status === 204)) {
+                if (response.status === 204) {
                   this.$swal.fire({
                     title: "Usuario eliminado!",
                     icon: "success",
