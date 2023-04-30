@@ -83,7 +83,7 @@
           </v-form>
           <div class="text-center">
             <button class="btn text-dark bg-green" @click="save()">
-              {{ this.update ? "Guardar usuario" : "Agregar usuario" }}
+              {{ this.update ? "Guardar membresía" : "Agregar membresía" }}
             </button>
           </div>
         </v-card-text>

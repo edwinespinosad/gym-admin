@@ -3,9 +3,7 @@
     <div
       class="text-white d-flex flex-column align-items-center sticky-top gap-4"
     >
-      <!-- <router-link class="navbar-brand mb-5" :to="{ name: 'home' }"> -->
-      <v-icon size="60" color="#7B7B7B">fa-solid fa-weight-hanging</v-icon>
-      <!-- </router-link> -->
+      <v-img src="/perfil.png" width="500" aspect-ratio="1"></v-img>
 
       <v-tooltip
         v-for="(link, index) in links"
