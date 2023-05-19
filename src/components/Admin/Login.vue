@@ -118,6 +118,7 @@ export default {
       user: {
         email: "",
         password: "",
+        type: 1,
       },
       valid: false,
       rules: {

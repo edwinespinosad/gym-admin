@@ -7,7 +7,7 @@
           <NavbarSuperior :user="user"></NavbarSuperior>
           <v-main style="background-color: #000000" class="container mt-5">
             <h5>{{ this.$route.meta.name }}</h5>
-            <router-view class="container vh-70" />
+            <router-view class="container " />
           </v-main>
         </div>
       </div>

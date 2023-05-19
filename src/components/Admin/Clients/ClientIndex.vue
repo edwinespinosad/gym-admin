@@ -9,14 +9,18 @@
       :urlState="urlStatus"
     >
       <template v-slot:image="{ data }">
-        <v-img
-          :src="`${URL}/${data.image}`"
-          height="50"
-          width="50"
-          contain
-        ></v-img>
+        <v-img :src="`${data.image}`" height="50" width="50" contain></v-img>
       </template>
 
+      <template v-slot:membership="{ data }">
+        <p>
+          {{
+            data.membership_name !== null
+              ? data.membership_name
+              : "Sin membresía"
+          }}
+        </p>
+      </template>
       <template v-slot:duration="{ data }">
         <span
           class="text-center"
@@ -117,16 +121,20 @@ export default {
   }),
   methods: {
     getDaysLeft(date, duration) {
-      let fecha = new Date(date);
+      try {
+        let fecha = new Date(date);
 
-      if (duration.includes("mes")) {
-        fecha.setMonth(fecha.getMonth() + parseInt(duration));
-        let days = Math.floor((new Date(fecha) - new Date()) / 86400000);
-        return days < 0 ? 0 : days;
-      } else {
-        fecha.setDate(fecha.getDate() + parseInt(duration));
-        let days = Math.floor((new Date(fecha) - new Date()) / 86400000);
-        return days < 0 ? 0 : days;
+        if (duration.includes("mes")) {
+          fecha.setMonth(fecha.getMonth() + parseInt(duration));
+          let days = Math.floor((new Date(fecha) - new Date()) / 86400000);
+          return days < 0 ? 0 : days;
+        } else {
+          fecha.setDate(fecha.getDate() + parseInt(duration));
+          let days = Math.floor((new Date(fecha) - new Date()) / 86400000);
+          return days < 0 ? 0 : days;
+        }
+      } catch (error) {
+        return 0;
       }
     },
     deleteUser(id) {
