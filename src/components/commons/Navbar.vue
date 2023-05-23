@@ -66,6 +66,11 @@ export default {
           title: "Gastos",
           icon: "fa-solid fa-money-bills",
         },
+        {
+          name: "suggestions",
+          title: "Sugerencias Recibidas",
+          icon: "fa-solid fa-exclamation",
+        },
       ],
       linksInstructor: [
         {

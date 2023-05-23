@@ -13,40 +13,49 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(row, index) in dataPag" :key="index">
-          <td
-            v-for="column in indexedColumns"
-            :key="column.colId * 100"
-            class="text-left align-middle"
-          >
-            <div class="d-flex align-items-center justify-content-start">
-              <slot
-                :name="getCellSlotName(column)"
-                :row="row"
-                :column="column"
-                v-bind:data="row"
-                :cell_value="getValueFromRow(row, column.name)"
-              >
-                {{ getValueFromRow(row, column.name) }}
-              </slot>
-            </div>
-          </td>
-          <td class="align-middle">
-            <div class="d-flex justify-content-evenly align-items-center">
-              <Toggle
-                v-if="toggleSwitch"
-                :active="row.active === 1 ? true : false"
-                :url="urlState"
-                :id="row.id"
-              ></Toggle>
-              <slot name="action-slot" v-bind="row"> </slot>
-            </div>
-          </td>
-        </tr>
+        <template v-if="dataPag.length === 0">
+          <tr>
+            <td :colspan="indexedColumns.length + 1" class="text-center">
+              <p>No hay registros.</p>
+            </td>
+          </tr>
+        </template>
+        <template v-else>
+          <tr v-for="(row, index) in dataPag" :key="index">
+            <td
+              v-for="column in indexedColumns"
+              :key="column.colId * 100"
+              class="text-left align-middle"
+            >
+              <div class="d-flex align-items-center justify-content-start">
+                <slot
+                  :name="getCellSlotName(column)"
+                  :row="row"
+                  :column="column"
+                  v-bind:data="row"
+                  :cell_value="getValueFromRow(row, column.name)"
+                >
+                  {{ getValueFromRow(row, column.name) }}
+                </slot>
+              </div>
+            </td>
+            <td class="align-middle">
+              <div class="d-flex justify-content-evenly align-items-center">
+                <Toggle
+                  v-if="toggleSwitch"
+                  :active="row.active === 1 ? true : false"
+                  :url="urlState"
+                  :id="row.id"
+                ></Toggle>
+                <slot name="action-slot" v-bind="row"> </slot>
+              </div>
+            </td>
+          </tr>
+        </template>
       </tbody>
     </table>
 
-    <nav aria-label="...">
+    <nav aria-label="..." v-if="dataPag.length !== 0">
       <ul class="pagination justify-content-center">
         <li class="page-item" :class="paginaActual === 1 ? 'disabled' : ''">
           <a class="page-link" @click="getPreviousPage()">Previous</a>

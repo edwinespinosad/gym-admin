@@ -6,6 +6,7 @@ import ClientIndex from '../components/Admin/Clients/ClientIndex.vue'
 import MembershipIndex from '../components/Admin/Memberships/MembershipIndex.vue'
 import InstructorIndex from '../components/Admin/Instructors/InstructorIndex.vue'
 import ExpensesIndex from '../components/Admin/Expenses/ExpensesIndex.vue'
+import SuggestionsIndex from '../components/Admin/Suggestions/SuggestionsIndex.vue'
 import RoutinesIndex from '../components/Instructor/Routines/RoutinesIndex.vue'
 import MealIndex from '../components/Instructor/Meal/MealIndex.vue'
 
@@ -132,6 +133,25 @@ const router = new VueRouter({
       component: ExpensesIndex,
       meta: {
         name: 'Gastos'
+      },
+      beforeEnter: (to, from, next) => {
+        let role = localStorage.getItem('role')
+        if (role === '3') {
+          next({
+            name: 'clients',
+            replace: true
+          })
+        } else {
+          next();
+        }
+      }
+    },
+    {
+      path: '/suggestions',
+      name: 'suggestions',
+      component: SuggestionsIndex,
+      meta: {
+        name: 'Sugerencias'
       },
       beforeEnter: (to, from, next) => {
         let role = localStorage.getItem('role')
