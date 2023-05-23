@@ -118,7 +118,6 @@ export default {
         this.membershipClient.fk_id_membership = this.membership;
         this.membershipClient.fk_id_client = this.fk_id_client;
         this.membershipClient.price = price.price;
-        console.log(this.membershipClient);
 
         axios
           .post(this.create_url, this.membershipClient, {

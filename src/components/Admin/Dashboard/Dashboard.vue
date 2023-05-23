@@ -1,21 +1,27 @@
 <template>
   <div>
-    <div class="">
-      <div class="d-flex align-items-center">
-        <h5 class="w-75">Ingresos</h5>
-        <v-select
-          class="my-0 py-0"
-          :items="filters"
-          outlined
-          dark
-          dense
-          v-model="periodIncome"
-        ></v-select>
+    <div class="d-flex justify-content-between align-items-center py-5">
+      <div class="w-48">
+        <div class="d-flex align-items-center">
+          <h5 class="w-75">Ingresos</h5>
+          <v-select
+            class="my-0 py-0"
+            :items="filters"
+            outlined
+            dark
+            dense
+            v-model="periodIncome"
+          ></v-select>
+        </div>
+        <v-card color="#0f0f0f" dark class="p-4">
+          <h2 class="text-center py-5">${{ incomes }}</h2>
+        </v-card>
       </div>
-      <v-card color="#0f0f0f" dark class="p-4">
-        <h2 class="text-center py-5">${{ incomes }}</h2>
-      </v-card>
+
+      <ExpenseCard></ExpenseCard>
     </div>
+
+    <EarningsCard></EarningsCard>
 
     <div class="d-flex justify-content-between align-items-center py-5">
       <div class="w-48">
@@ -74,9 +80,13 @@ ChartJS.register(
 );
 
 import axios from "axios";
+import ExpenseCard from "./ExpenseCard.vue";
+import EarningsCard from "./EarningsCard.vue";
 export default {
   components: {
     Bar,
+    ExpenseCard,
+    EarningsCard,
   },
   data() {
     return {
@@ -165,7 +175,10 @@ export default {
       try {
         const response = await axios
           .get(
-            `${process.env.VITE_API_URL.replace(/"/g, "")}/api/incomes?periodo=${this.periodIncome.toLowerCase()}`,
+            `${process.env.VITE_API_URL.replace(
+              /"/g,
+              ""
+            )}/api/incomes?periodo=${this.periodIncome.toLowerCase()}`,
             {
               headers: { "x-access-token": localStorage.getItem("token") },
             }
@@ -185,7 +198,10 @@ export default {
       try {
         const response = await axios
           .get(
-            `${process.env.VITE_API_URL.replace(/"/g, "")}/api/memberships-sales?periodo=${this.periodMembershipSales.toLowerCase()}`,
+            `${process.env.VITE_API_URL.replace(
+              /"/g,
+              ""
+            )}/api/memberships-sales?periodo=${this.periodMembershipSales.toLowerCase()}`,
             {
               headers: { "x-access-token": localStorage.getItem("token") },
             }
@@ -218,7 +234,10 @@ export default {
       try {
         const response = await axios
           .get(
-            `${process.env.VITE_API_URL.replace(/"/g, "")}/api/new-clients?periodo=${this.periodNewClients.toLowerCase()}`,
+            `${process.env.VITE_API_URL.replace(
+              /"/g,
+              ""
+            )}/api/new-clients?periodo=${this.periodNewClients.toLowerCase()}`,
             {
               headers: { "x-access-token": localStorage.getItem("token") },
             }

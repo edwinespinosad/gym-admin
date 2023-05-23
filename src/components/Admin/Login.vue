@@ -43,7 +43,25 @@
                   :rules="rules.passwordRule"
                 ></v-text-field>
               </v-col>
-
+              <v-col cols="6" offset="3">
+                <p>Selecciona tu perfil</p>
+                <v-radio-group v-model="radios" row>
+                  <v-radio value="1" color="#e3ffa8">
+                    <template v-slot:label>
+                      <div>
+                        <strong class="success--text">Administrador</strong>
+                      </div>
+                    </template>
+                  </v-radio>
+                  <v-radio value="3" color="#e3ffa8">
+                    <template v-slot:label>
+                      <div>
+                        <strong class="primary--text">Instructor</strong>
+                      </div>
+                    </template>
+                  </v-radio>
+                </v-radio-group>
+              </v-col>
               <v-col
                 cols="12"
                 class="d-flex justify-content-center align-items-center"
@@ -57,54 +75,6 @@
         </v-form>
       </v-col>
     </v-row>
-
-    <!-- <div class="row justify-content-center align-items-center vh-100">
-      <div class="col-md-6 col-lg-8">
-        <v-card class="elevation-12 p-4" dark>
-          <h2 class="font-weight-bold text-center">Inicio de Sesión</h2>
-
-          <div class="d-flex justify-content-center align-items-center">
-            <div></div>
-
-            <div>
-              <v-form ref="form" lazy-validation v-model="valid">
-                <v-card-text>
-                  <v-row>
-                    <v-col cols="6">
-                      <p>Correo Electrónico</p>
-                      <v-text-field
-                        v-model="user.email"
-                        required
-                        dense
-                        dark
-                        outlined
-                        :rules="rules.emailRule"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                      <p>Contraseña</p>
-                      <v-text-field
-                        v-model="user.password"
-                        type="password"
-                        dense
-                        dark
-                        outlined
-                        :rules="rules.passwordRule"
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
-                </v-card-text>
-              </v-form>
-              <v-card-actions class="justify-content-center">
-                <v-btn class="text-dark" color="#e3ffa8" @click="signIn()">
-                  Iniciar Sesión
-                </v-btn>
-              </v-card-actions>
-            </div>
-          </div>
-        </v-card>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -115,6 +85,7 @@ export default {
   name: "Login",
   data() {
     return {
+      radios: "1",
       user: {
         email: "",
         password: "",
@@ -127,9 +98,13 @@ export default {
       },
     };
   },
+  watch: {
+    radios: function (newVal, oldVal) {
+      this.user.type = parseInt(newVal);
+    },
+  },
   created() {
     this.URL_CREATE = `${process.env.VITE_API_URL.replace(/"/g, "")}/api/login`;
-    // this.URL_CREATE = process.env.VITE_API_URL.replace(/"/g, "") + "/api/login";
     this.URL_VALID = `${process.env.VITE_API_URL.replace(
       /"/g,
       ""
@@ -150,6 +125,7 @@ export default {
             let user = response.data.user;
             localStorage.setItem("token", token);
             localStorage.setItem("user", user);
+            localStorage.setItem("role", this.radios);
             setTimeout(() => {
               window.location.reload();
             }, 2000);

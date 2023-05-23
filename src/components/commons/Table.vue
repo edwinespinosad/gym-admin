@@ -14,7 +14,11 @@
       </thead>
       <tbody>
         <tr v-for="(row, index) in dataPag" :key="index">
-          <td v-for="column in indexedColumns" :key="column.colId * 100" class="text-center align-middle">
+          <td
+            v-for="column in indexedColumns"
+            :key="column.colId * 100"
+            class="text-left align-middle"
+          >
             <div class="d-flex align-items-center justify-content-start">
               <slot
                 :name="getCellSlotName(column)"
@@ -27,14 +31,16 @@
               </slot>
             </div>
           </td>
-          <td class="d-flex justify-content-evenly align-items-center">
-            <Toggle
-              v-if="toggleSwitch"
-              :active="row.active === 1 ? true : false"
-              :url="urlState"
-              :id="row.id"
-            ></Toggle>
-            <slot name="action-slot" v-bind="row"> </slot>
+          <td class="align-middle">
+            <div class="d-flex justify-content-evenly align-items-center">
+              <Toggle
+                v-if="toggleSwitch"
+                :active="row.active === 1 ? true : false"
+                :url="urlState"
+                :id="row.id"
+              ></Toggle>
+              <slot name="action-slot" v-bind="row"> </slot>
+            </div>
           </td>
         </tr>
       </tbody>

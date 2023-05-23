@@ -5,6 +5,10 @@ import UserIndex from '../components/Admin/Users/UserIndex.vue'
 import ClientIndex from '../components/Admin/Clients/ClientIndex.vue'
 import MembershipIndex from '../components/Admin/Memberships/MembershipIndex.vue'
 import InstructorIndex from '../components/Admin/Instructors/InstructorIndex.vue'
+import ExpensesIndex from '../components/Admin/Expenses/ExpensesIndex.vue'
+import RoutinesIndex from '../components/Instructor/Routines/RoutinesIndex.vue'
+import MealIndex from '../components/Instructor/Meal/MealIndex.vue'
+
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -14,7 +18,18 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      redirect: '/dashboard'
+      redirect: '/dashboard',
+      beforeEnter: (to, from, next) => {
+        let role = localStorage.getItem('role')
+        if (role === '3') {
+          next({
+            name: 'clients',
+            replace: true
+          })
+        } else {
+          next();
+        }
+      }
     },
     {
       path: '/dashboard',
@@ -22,6 +37,17 @@ const router = new VueRouter({
       component: Dashboard,
       meta: {
         name: 'Dashboard'
+      },
+      beforeEnter: (to, from, next) => {
+        let role = localStorage.getItem('role')
+        if (role === '3') {
+          next({
+            name: 'clients',
+            replace: true
+          })
+        } else {
+          next();
+        }
       }
     },
     {
@@ -30,6 +56,17 @@ const router = new VueRouter({
       component: UserIndex,
       meta: {
         name: 'Usuarios'
+      },
+      beforeEnter: (to, from, next) => {
+        let role = localStorage.getItem('role')
+        if (role === '3') {
+          next({
+            name: 'clients',
+            replace: true
+          })
+        } else {
+          next();
+        }
       }
     },
     {
@@ -38,6 +75,17 @@ const router = new VueRouter({
       component: ClientIndex,
       meta: {
         name: 'Clientes'
+      },
+      beforeEnter: (to, from, next) => {
+        let role = localStorage.getItem('role')
+        if (role === '3') {
+          next({
+            name: 'clients',
+            replace: true
+          })
+        } else {
+          next();
+        }
       }
     },
     {
@@ -46,6 +94,17 @@ const router = new VueRouter({
       component: MembershipIndex,
       meta: {
         name: 'Membresías'
+      },
+      beforeEnter: (to, from, next) => {
+        let role = localStorage.getItem('role')
+        if (role === '3') {
+          next({
+            name: 'clients',
+            replace: true
+          })
+        } else {
+          next();
+        }
       }
     },
     {
@@ -54,6 +113,52 @@ const router = new VueRouter({
       component: InstructorIndex,
       meta: {
         name: 'Instructores'
+      },
+      beforeEnter: (to, from, next) => {
+        let role = localStorage.getItem('role')
+        if (role === '3') {
+          next({
+            name: 'clients',
+            replace: true
+          })
+        } else {
+          next();
+        }
+      }
+    },
+    {
+      path: '/expenses',
+      name: 'expenses',
+      component: ExpensesIndex,
+      meta: {
+        name: 'Gastos'
+      },
+      beforeEnter: (to, from, next) => {
+        let role = localStorage.getItem('role')
+        if (role === '3') {
+          next({
+            name: 'clients',
+            replace: true
+          })
+        } else {
+          next();
+        }
+      }
+    },
+    {
+      path: '/routines',
+      name: 'routines',
+      component: RoutinesIndex,
+      meta: {
+        name: 'Rutinas'
+      }
+    },
+    {
+      path: '/meals',
+      name: 'meals',
+      component: MealIndex,
+      meta: {
+        name: 'Comidas'
       }
     },
   ]

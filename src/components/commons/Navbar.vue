@@ -6,7 +6,7 @@
       <v-img src="/perfil.png" width="500" aspect-ratio="1"></v-img>
 
       <v-tooltip
-        v-for="(link, index) in links"
+        v-for="(link, index) in linksToShow"
         :key="index"
         right
         color="#E3FFA8"
@@ -61,8 +61,33 @@ export default {
           title: "Instructores",
           icon: "fa-solid fa-dumbbell",
         },
+        {
+          name: "expenses",
+          title: "Gastos",
+          icon: "fa-solid fa-money-bills",
+        },
+      ],
+      linksInstructor: [
+        {
+          name: "routines",
+          title: "Rutinas",
+          icon: "fa-solid fa-dumbbell",
+        },
+        {
+          name: "meals",
+          title: "Comidas",
+          icon: "fa-solid fa-bowl-rice",
+        },
       ],
     };
+  },
+  computed: {
+    useInstructorLinks() {
+      return localStorage.getItem("role") === "3";
+    },
+    linksToShow() {
+      return this.useInstructorLinks ? this.linksInstructor : this.links;
+    },
   },
   methods: {
     async redirect() {
