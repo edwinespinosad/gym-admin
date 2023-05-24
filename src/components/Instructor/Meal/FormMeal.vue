@@ -160,8 +160,6 @@ export default {
       if (file) {
         if (typeof file !== "string") {
           this.view_image = URL.createObjectURL(file);
-          //   console.log(typeof file);
-          //   console.log(URL.createObjectURL(file));
         } else {
           this.view_image = file;
         }
@@ -189,14 +187,6 @@ export default {
       this.meal.name = data.name;
       this.meal.meal_preparation = data.meal_preparation;
       this.image = data.image;
-      console.log(data.image);
-      console.log(
-        this.update
-          ? this.dataUpdate.image
-          : this.view_image.includes("blob")
-          ? this.view_image
-          : this.URL + "/" + this.view_image
-      );
     },
     save() {
       if (this.$refs.form.validate() && this.image !== null) {
@@ -224,6 +214,11 @@ export default {
                 bus.$emit("reload-grid");
                 this.dialog = false;
                 this.$refs.form.reset();
+
+                this.image = null;
+                this.view_image = "";
+                this.validImage = false;
+                this.change_image = false;
               } else {
                 this.$swal.fire({
                   title: "Error!",
@@ -239,6 +234,8 @@ export default {
               headers: { "x-access-token": localStorage.getItem("token") },
             })
             .then((response) => {
+              this.loading = false;
+
               if (response.data.success) {
                 this.$swal.fire({
                   title: "Comida agregada!",
@@ -249,6 +246,10 @@ export default {
                 bus.$emit("reload-grid");
                 this.dialog = false;
                 this.$refs.form.reset();
+                this.image = null;
+                this.view_image = "";
+                this.validImage = false;
+                this.change_image = false;
               } else {
                 this.$swal.fire({
                   title: "Error!",
