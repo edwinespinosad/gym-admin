@@ -1,7 +1,9 @@
 <template>
   <div>
-    <div class="d-flex justify-content-between align-items-center py-5">
-      <div class="w-48">
+    <v-row>
+      <EarningsCard></EarningsCard>
+
+      <v-col cols="12" lg="6" xl="6">
         <div class="d-flex align-items-center">
           <h5 class="w-75">Ingresos</h5>
           <v-select
@@ -16,15 +18,10 @@
         <v-card color="#0f0f0f" dark class="p-4">
           <h2 class="text-center py-5">${{ incomes }}</h2>
         </v-card>
-      </div>
-
+      </v-col>
       <ExpenseCard></ExpenseCard>
-    </div>
 
-    <EarningsCard></EarningsCard>
-
-    <div class="d-flex justify-content-between align-items-center py-5">
-      <div class="w-48">
+      <v-col cols="12" lg="6" xl="6">
         <div class="d-flex align-items-center">
           <h5 class="w-75">Membresías Vendidas</h5>
           <v-select
@@ -38,9 +35,9 @@
         <v-card color="#0f0f0f" dark class="p-4">
           <canvas id="myChart" ref="chartMembershipSales"></canvas>
         </v-card>
-      </div>
+      </v-col>
 
-      <div class="w-48">
+      <v-col cols="12" lg="6" xl="6">
         <div class="d-flex align-items-center">
           <h5 class="w-75">Nuevos Clientes</h5>
           <v-select
@@ -54,8 +51,8 @@
         <v-card color="#0f0f0f" dark class="p-4">
           <canvas id="myChart" ref="chartNewClients"></canvas>
         </v-card>
-      </div>
-    </div>
+      </v-col>
+    </v-row>
   </div>
 </template>
 

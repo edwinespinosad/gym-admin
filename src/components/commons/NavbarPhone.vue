@@ -26,6 +26,7 @@
             class="d-flex align-items-center gap-1"
             v-for="(link, index) in linksToShow"
             :key="index"
+            @click="closeNav"
           >
             <router-link :to="{ name: link.name }" class="router">
               <div class="d-flex align-items-baseline router-text">
@@ -111,7 +112,15 @@ export default {
       return this.useInstructorLinks ? this.linksInstructor : this.links;
     },
   },
+  created() {},
   methods: {
+    closeNav() {
+      const btn = document.getElementById("btn-navbar");
+
+      btn.addEventListener("click", function () {});
+
+      btn.click();
+    },
     async redirect() {
       try {
         await this.$router.push("/");

@@ -176,6 +176,7 @@ export default {
                 bus.$emit("reload-grid");
                 this.dialog = false;
                 this.$refs.form.reset();
+                location.reload();
               } else {
                 this.$swal.fire({
                   title: "Error!",

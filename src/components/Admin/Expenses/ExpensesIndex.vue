@@ -28,7 +28,7 @@ export default {
       },
       {
         label: "Costo",
-        name: "cost",
+        name: "total",
       },
     ],
     url: `${process.env.VITE_API_URL.replace(/"/g, "")}/api/expenses`,

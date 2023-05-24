@@ -56,9 +56,9 @@
           :data-update="data"
         ></AddMembershipClient>
 
-        <v-icon color="red" @click="deleteUser(data.id)">
+        <!-- <v-icon color="red" @click="deleteUser(data.id)">
           fa-regular fa-trash-can
-        </v-icon>
+        </v-icon> -->
       </template>
     </Table>
   </div>
@@ -78,10 +78,6 @@ export default {
     usersPag: [],
     paginaActual: 1,
     columns: [
-      {
-        label: "#",
-        name: "id",
-      },
       {
         label: "Imagen",
         name: "image",

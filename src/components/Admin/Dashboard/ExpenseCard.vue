@@ -1,5 +1,5 @@
 <template>
-  <div class="w-48">
+  <v-col cols="12" lg="6" xl="6">
     <div class="d-flex align-items-center">
       <h5 class="w-75">Gastos</h5>
       <v-select
@@ -14,7 +14,7 @@
     <v-card color="#0f0f0f" dark class="p-4">
       <h2 class="text-center py-5">${{ expenses }}</h2>
     </v-card>
-  </div>
+  </v-col>
 </template>
 
 <script>
