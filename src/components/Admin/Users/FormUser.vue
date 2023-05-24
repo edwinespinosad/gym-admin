@@ -35,7 +35,7 @@
           </v-row>
           <v-form ref="form" lazy-validation v-model="valid">
             <v-row>
-              <v-col cols="6">
+              <v-col cols="12" lg="6" xl="6">
                 <p>Nombre</p>
                 <v-text-field
                   v-model="user.name"
@@ -46,7 +46,7 @@
                   :rules="rules.nameRule"
                 ></v-text-field>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="12" lg="6" xl="6">
                 <p>Apellidos</p>
                 <v-text-field
                   v-model="user.last_name"
@@ -57,7 +57,7 @@
                   :rules="rules.lastNameRule"
                 ></v-text-field>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="12" lg="6" xl="6">
                 <p>Teléfono</p>
                 <v-text-field
                   v-model="user.phone"
@@ -70,7 +70,7 @@
                   :rules="rules.phoneRule"
                 ></v-text-field>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="12" lg="6" xl="6">
                 <p>Correo Electrónico</p>
                 <v-text-field
                   v-model="user.email"
@@ -81,7 +81,7 @@
                   :rules="rules.emailRule"
                 ></v-text-field>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="12" lg="6" xl="6">
                 <p>Contraseña</p>
                 <v-text-field
                   v-model="user.password"

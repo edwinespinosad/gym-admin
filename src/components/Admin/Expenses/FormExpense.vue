@@ -23,7 +23,7 @@
           </v-row>
           <v-form ref="form" lazy-validation v-model="valid">
             <v-row>
-              <v-col cols="6">
+              <v-col cols="12" lg="6" xl="6">
                 <p>Descripción</p>
                 <v-text-field
                   v-model="expense.description"
@@ -34,7 +34,7 @@
                   :rules="rules.descriptionRule"
                 ></v-text-field>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="12" lg="6" xl="6">
                 <p>Costo</p>
                 <v-text-field
                   v-model="expense.cost"

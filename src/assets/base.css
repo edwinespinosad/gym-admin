@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Meera+Inimai&family=Mulish&family=Numans&display=swap');
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
     font-family: 'Meera Inimai', sans-serif;
 }
 
@@ -50,6 +54,10 @@ h1, h2, h3, h4, h5 {
     color: #0f0f0f !important;
 }
 
+.active-link h5 {
+    color: #0f0f0f !important;
+}
+
 .drop {
     background: #ffffff;
     border: 2px dashed #707070;
@@ -74,4 +82,34 @@ h1, h2, h3, h4, h5 {
 
 .w-48 {
     width: 48% !important;
+}
+
+/* MEDIA QUERY */
+
+@media (max-width: 991px) {
+    .none {
+        display: none;
+    }
+
+    .mb-ph-5 {
+        margin-bottom: 20px !important;
+    }
+}
+
+@media (min-width: 991px) {
+
+    .card-incomes {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 48% !important;
+
+    }
+
+    .card-expenses {
+        display: flex;
+        align-items: center;
+        width: 48% !important;
+
+    }
 }

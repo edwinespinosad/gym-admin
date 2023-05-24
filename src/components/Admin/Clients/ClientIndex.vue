@@ -1,7 +1,8 @@
 <template>
-  <div style="background-color: #0f0f0f" class="rounded-2">
-    <!-- <FormUser :update="false"></FormUser> -->
-
+  <div
+    style="background-color: #0f0f0f; width: auto; overflow-x: auto"
+    class="rounded-2"
+  >
     <Table
       :columns="columns"
       :url="url"

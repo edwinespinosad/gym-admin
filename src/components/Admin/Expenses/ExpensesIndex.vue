@@ -1,13 +1,11 @@
 <template>
-  <div style="background-color: #0f0f0f" class="rounded-2">
+  <div
+    style="background-color: #0f0f0f; width: auto; overflow-x: auto"
+    class="rounded-2"
+  >
     <FormExpense></FormExpense>
 
-    <Table
-      :columns="columns"
-      :url="url"
-      :toggleSwitch="false"
-    >
-    </Table>
+    <Table :columns="columns" :url="url" :toggleSwitch="false"> </Table>
   </div>
 </template>
     

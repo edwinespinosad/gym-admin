@@ -1,5 +1,8 @@
 <template>
-  <div style="background-color: #0f0f0f" class="rounded-2">
+  <div
+    class="rounded-2"
+    style="background-color: #0f0f0f; width: auto; overflow-x: auto"
+  >
     <FormUser :update="false"></FormUser>
 
     <Table

@@ -40,7 +40,7 @@
               </div>
             </td>
             <td class="align-middle">
-              <div class="d-flex justify-content-evenly align-items-center">
+              <div class="d-flex justify-content-evenly align-items-center gap-3">
                 <Toggle
                   v-if="toggleSwitch"
                   :active="row.active === 1 ? true : false"

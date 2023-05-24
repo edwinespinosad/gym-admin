@@ -35,7 +35,7 @@
           </v-row>
           <v-form ref="form" lazy-validation v-model="valid">
             <v-row>
-              <v-col cols="6">
+              <v-col cols="12" lg="6" xl="6">
                 <p>Nombre</p>
                 <v-text-field
                   v-model="membership.name"
@@ -46,7 +46,7 @@
                   :rules="rules.nameRule"
                 ></v-text-field>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="12" lg="6" xl="6">
                 <p>Duración</p>
                 <v-text-field
                   v-model="membership.duration"
@@ -57,7 +57,7 @@
                   :rules="rules.durationRule"
                 ></v-text-field>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="12" lg="6" xl="6">
                 <p>Precio</p>
                 <v-text-field
                   v-model="membership.price"
@@ -69,7 +69,7 @@
                   :rules="rules.priceRule"
                 ></v-text-field>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="12" lg="6" xl="6">
                 <p>Beneficios</p>
                 <v-text-field
                   v-model="membership.benefits"

@@ -85,7 +85,7 @@
                   La imagen es necesaria
                 </p>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="12" lg="6" xl="6">
                 <p>Nombre</p>
                 <v-text-field
                   v-model="instructor.name"
@@ -96,7 +96,7 @@
                   :rules="rules.nameRule"
                 ></v-text-field>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="12" lg="6" xl="6">
                 <p>Apellidos</p>
                 <v-text-field
                   v-model="instructor.last_name"
@@ -107,7 +107,7 @@
                   :rules="rules.lastNameRule"
                 ></v-text-field>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="12" lg="6" xl="6">
                 <p>Teléfono</p>
                 <v-text-field
                   v-model="instructor.phone"
@@ -120,7 +120,7 @@
                   :rules="rules.phoneRule"
                 ></v-text-field>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="12" lg="6" xl="6">
                 <p>Correo Electrónico</p>
                 <v-text-field
                   v-model="instructor.email"
@@ -131,7 +131,7 @@
                   :rules="rules.emailRule"
                 ></v-text-field>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="12" lg="6" xl="6">
                 <p>Contraseña</p>
                 <v-text-field
                   v-model="instructor.password"
